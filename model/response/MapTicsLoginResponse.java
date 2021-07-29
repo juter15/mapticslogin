@@ -15,5 +15,5 @@ public class MapTicsLoginResponse {
     private String request_id;
 
     @JsonProperty("data")
-    List<MapTicsLoginResponseData> mapTicsLoginResponseDataList;
+    MapTicsLoginResponseData mapTicsLoginResponseData;
 }
