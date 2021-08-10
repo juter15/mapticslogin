@@ -23,22 +23,16 @@ public class LoginController {
         return "login";
     }
 
-    @PostMapping("/login")
-    public String login(@Validated LoginModel loginModel){
-        log.info("id: {}, pass: {}", loginModel.getId(), loginModel.getPassword());
-
-
-
-        return "login";
-    }
 
     @PostMapping("/account")
     public ModelAndView account(LoginRequest login){
-        log.info("LoginRequest: {}", login);
         MapTicsLoginResponse mapticsLoginResult = authService.accountLogin(login);
         //LoginResponse responseBody = testService.accountLogin(login);
-        log.info("responseBody: {}", mapticsLoginResult);
         if(mapticsLoginResult != null){
+            if( mapticsLoginResult.getLoginResult().equals("EXPIRES")){
+                String Err = "EXPIRES";
+                return new ModelAndView("login", "loginErr", Err);
+            }
             String url = "redirect:";
             url += mapticsLoginResult.getMapTicsLoginResponseData().getUrl();
             String token = mapticsLoginResult.getMapTicsLoginResponseData().getToken();
@@ -49,11 +43,18 @@ public class LoginController {
             return new ModelAndView( url+token);
 
             //return "redirect:http://www.naver.com";
+
         }
         else{
             String Err = "Failed";
             return new ModelAndView("login", "loginErr", Err);
         }
 
+    }
+
+    @RequestMapping(value = "/robots.txt")
+    @ResponseBody
+    public String robots() {
+        return "<p>User-agent: *</p>"+"\n<p>"+"Disallow: /"+"</p>\n";
     }
 }

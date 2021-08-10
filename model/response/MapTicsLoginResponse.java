@@ -14,6 +14,8 @@ public class MapTicsLoginResponse {
     private String message;
     private String request_id;
 
+    private String loginResult;
+
     @JsonProperty("data")
     MapTicsLoginResponseData mapTicsLoginResponseData;
 }

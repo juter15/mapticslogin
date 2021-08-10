@@ -15,6 +15,7 @@ public class GoodSoftBody {
 	private String authCode;
 	private String userName;
 	private String companyName;
+	private String storeCode;
 	private String userNumber;
 	private String userType;
 	private String storeStatus;
