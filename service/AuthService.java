@@ -53,7 +53,6 @@ public class AuthService {
                         .select(qStorePayment.StorePaymentSeq, qStorePayment.StoreSeq, qStorePayment.StartDate, qStorePayment.EndDate)
                         .from(qStorePayment)
                         .where(qStorePayment.StoreSeq.eq(Integer.parseInt(goodSoftLoginResponse.getBody().getStoreCode())))
-
                         .fetchOne();
                 if (store_payment != null && periodCheck(store_payment)) {
                     MapTicsLoginRequest mapTicsLoginRequest = new MapTicsLoginRequest();
